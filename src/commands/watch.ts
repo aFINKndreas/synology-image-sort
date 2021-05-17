@@ -10,7 +10,7 @@ import {moveMediaFile} from '../helpers/moveMediaFile';
 import {moveUnkownFile} from '../helpers/moveUnkownFile';
 
 export default class Watch extends Command {
-  static description = 'describe the command here';
+  static description = 'sort files (images, videos) on synology nas';
   static examples = [
     `$ synology-image-sort watch -s ./source -d ./destination -u ./unknown -e ./existing`,
     `$ synology-image-sort watch -s ./source -d ./destination -u ./unknown -e ./existing -t`,

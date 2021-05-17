@@ -6,36 +6,32 @@
 [![License](https://img.shields.io/npm/l/synology-image-sort.svg)](https://github.com/afinkndreas/synology-image-sort/blob/master/package.json)
 
 <!-- toc -->
-
-- [synology-image-sort](#synology-image-sort)
-- [Usage](#usage)
-- [Commands](#commands)
+* [synology-image-sort](#synology-image-sort)
+* [Usage](#usage)
+* [Commands](#commands)
 <!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
-
 ```sh-session
 $ npm install -g synology-image-sort
 $ synology-image-sort COMMAND
 running command...
 $ synology-image-sort (-v|--version|version)
-synology-image-sort/0.0.2 darwin-x64 node-v12.13.1
+synology-image-sort/0.0.3 darwin-x64 node-v12.13.1
 $ synology-image-sort --help [COMMAND]
 USAGE
   $ synology-image-sort COMMAND
 ...
 ```
-
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-
-- [`synology-image-sort help [COMMAND]`](#synology-image-sort-help-command)
-- [`synology-image-sort watch`](#synology-image-sort-watch)
+* [`synology-image-sort help [COMMAND]`](#synology-image-sort-help-command)
+* [`synology-image-sort watch`](#synology-image-sort-watch)
 
 ## `synology-image-sort help [COMMAND]`
 
@@ -79,6 +75,5 @@ EXAMPLES
   $ synology-image-sort watch -s ./source -d ./destination -u ./unknown -e ./existing -n DD.MM.YYYY-HH.mm.ss.SSS
 ```
 
-_See code: [src/commands/watch.ts](https://github.com/afinkndreas/synology-image-sort/blob/v0.0.2/src/commands/watch.ts)_
-
+_See code: [src/commands/watch.ts](https://github.com/afinkndreas/synology-image-sort/blob/v0.0.3/src/commands/watch.ts)_
 <!-- commandsstop -->
