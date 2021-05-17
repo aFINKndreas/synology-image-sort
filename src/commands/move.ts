@@ -29,38 +29,43 @@ export default class Move extends Command {
   };
 
   async run() {
-    const {flags} = this.parse(Move);
-    const source = flags.source;
-    const destination = flags.destination;
-    const unknown = flags.unknown;
-    const existing = flags.existing;
-    const format = flags.format;
-    const name = flags.name;
-    const tags = flags.tags;
-    const checkDirectoryTasks = getCheckDirectoryTasks({source, destination, unknown, existing});
-    await checkDirectoryTasks.run().catch(() => this.exit());
-    const files = await recursive(source);
-    for (let index = 0; index < files.length; index++) {
-      const filepath = files[index];
-      if (filepath.indexOf('SynoEAStream') >= 0 || filepath.indexOf('@eaDir') >= 0) return;
-      this.log(`process file '${filepath}'`);
-      const isImage = isImageFile(filepath);
-      const isVideo = isVideoFile(filepath);
-      if (isImage || isVideo) {
-        const exifData = await getExifData(filepath);
-        const exifDate = exifData ? new Date(exifData.exif.DateTimeOriginal) : undefined;
-        if (!exifDate || exifDate.getFullYear() === 1970 || isNaN(exifDate.getFullYear())) {
+    try {
+      const {flags} = this.parse(Move);
+      const source = flags.source;
+      const destination = flags.destination;
+      const unknown = flags.unknown;
+      const existing = flags.existing;
+      const format = flags.format;
+      const name = flags.name;
+      const tags = flags.tags;
+      const checkDirectoryTasks = getCheckDirectoryTasks({source, destination, unknown, existing});
+      await checkDirectoryTasks.run().catch(() => this.exit());
+      const files = await recursive(source);
+      for (let index = 0; index < files.length; index++) {
+        const filepath = files[index];
+        if (filepath.indexOf('SynoEAStream') >= 0 || filepath.indexOf('@eaDir') >= 0) return;
+        this.log(`process file '${filepath}'`);
+        const isImage = isImageFile(filepath);
+        const isVideo = isVideoFile(filepath);
+        if (isImage || isVideo) {
+          const exifData = await getExifData(filepath);
+          const exifDate = exifData ? new Date(exifData.exif.DateTimeOriginal) : undefined;
+          if (!exifDate || exifDate.getFullYear() === 1970 || isNaN(exifDate.getFullYear())) {
+            const statMDate = getStatMDate(filepath);
+            if (!statMDate) return;
+            moveMediaFile({filepath, date: statMDate, source, destination, existing, format, name, tags});
+          } else {
+            moveMediaFile({filepath, date: exifDate, source, destination, existing, format, name, tags});
+          }
+        } else {
           const statMDate = getStatMDate(filepath);
           if (!statMDate) return;
-          moveMediaFile({filepath, date: statMDate, source, destination, existing, format, name, tags});
-        } else {
-          moveMediaFile({filepath, date: exifDate, source, destination, existing, format, name, tags});
+          moveUnkownFile({filepath, date: statMDate, source, unknown, existing, format, name});
         }
-      } else {
-        const statMDate = getStatMDate(filepath);
-        if (!statMDate) return;
-        moveUnkownFile({filepath, date: statMDate, source, unknown, existing, format, name});
       }
+    } catch (error) {
+      this.error('move', error);
+      this.exit();
     }
   }
 }
