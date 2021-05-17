@@ -5,6 +5,7 @@ export const getStatMDate = (filepath: string): Date | undefined => {
     const stat = fs.statSync(filepath);
     return stat.mtime;
   } catch (error) {
+    console.log('getStatMDate', error);
     return undefined;
   }
 };

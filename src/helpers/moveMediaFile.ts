@@ -88,7 +88,9 @@ const setExifFolderTags = ({filepath, folderTags}: SetExifFolderTagsProps) => {
       source: filepath,
       tags: folderTags.map((value) => ({tag: 'iptc:keywords', value})),
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log('setExifFolderTags', error);
+  }
 };
 
 export const moveMediaFile = ({
@@ -147,6 +149,7 @@ export const moveMediaFile = ({
     }
     return true;
   } catch (error) {
+    console.log('moveMediaFile', error);
     return false;
   }
 };
