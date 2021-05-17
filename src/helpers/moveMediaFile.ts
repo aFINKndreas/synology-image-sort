@@ -116,7 +116,8 @@ export const moveMediaFile = ({
     createDirectoriesIfNotExist(dateDirectories);
     const exists = fs.existsSync(`${directory}/${fileName}`);
     if (!exists) {
-      fs.renameSync(filepath, `${directory}/${fileName}`);
+      fs.copyFileSync(filepath, `${directory}/${fileName}`);
+      fs.unlinkSync(filepath);
       sourceFileDirectories.forEach((sourceFileDirectory) => {
         const files = fs.readdirSync(sourceFileDirectory);
         if (files.length === 0) {
@@ -133,7 +134,8 @@ export const moveMediaFile = ({
     } else {
       const files = fs.readdirSync(existing);
       const index = files.length + 1;
-      fs.renameSync(filepath, `${existing}/#${index}-${fileName}`);
+      fs.copyFileSync(filepath, `${existing}/#${index}-${fileName}`);
+      fs.unlinkSync(filepath);
       sourceFileDirectories.forEach((sourceFileDirectory) => {
         const files = fs.readdirSync(sourceFileDirectory);
         if (files.length === 0) {
