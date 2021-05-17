@@ -19,7 +19,7 @@ $ npm install -g synology-image-sort
 $ synology-image-sort COMMAND
 running command...
 $ synology-image-sort (-v|--version|version)
-synology-image-sort/0.0.3 darwin-x64 node-v12.13.1
+synology-image-sort/0.0.4 darwin-x64 node-v12.13.1
 $ synology-image-sort --help [COMMAND]
 USAGE
   $ synology-image-sort COMMAND
@@ -52,7 +52,7 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2
 
 ## `synology-image-sort watch`
 
-describe the command here
+sort files (images, videos) on synology nas
 
 ```
 USAGE
@@ -75,5 +75,5 @@ EXAMPLES
   $ synology-image-sort watch -s ./source -d ./destination -u ./unknown -e ./existing -n DD.MM.YYYY-HH.mm.ss.SSS
 ```
 
-_See code: [src/commands/watch.ts](https://github.com/afinkndreas/synology-image-sort/blob/v0.0.3/src/commands/watch.ts)_
+_See code: [src/commands/watch.ts](https://github.com/afinkndreas/synology-image-sort/blob/v0.0.4/src/commands/watch.ts)_
 <!-- commandsstop -->
