@@ -11,7 +11,6 @@ export const getExifData = async (filepath: string): Promise<ExifData | undefine
     const data = await exif.read(filepath);
     return data;
   } catch (error) {
-    console.log('getExifData', error);
     return undefined;
   }
 };
