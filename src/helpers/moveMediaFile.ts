@@ -89,11 +89,11 @@ const setExifFolderTags = ({filepath, folderTags}: SetExifFolderTagsProps) => {
       tags: folderTags.map((value) => ({tag: 'iptc:keywords', value})),
     });
   } catch (error) {
-    console.log('setExifFolderTags', error);
+    console.log('setExifFolderTags failed', error);
   }
 };
 
-export const moveMediaFile = ({
+export const moveMediaFile = async ({
   filepath,
   date,
   source,
@@ -102,7 +102,7 @@ export const moveMediaFile = ({
   format,
   name,
   tags,
-}: MoveImageFileProps): boolean => {
+}: MoveImageFileProps): Promise<boolean> => {
   try {
     const isImage = isImageFile(filepath);
     const formattedFolderDate = formatDate(date, format, {locale: deLocale});
@@ -142,16 +142,10 @@ export const moveMediaFile = ({
           fs.rmdirSync(sourceFileDirectory);
         }
       });
-      if (tags && isImage) {
-        const folderTags = getFolderTags({filepath, source});
-        if (!!folderTags.length) {
-          setExifFolderTags({filepath: `${existing}/#${index}-${fileName}`, folderTags});
-        }
-      }
     }
     return true;
   } catch (error) {
-    console.log('moveMediaFile', error);
+    console.log('moveMediaFile failed', error);
     return false;
   }
 };

@@ -99,7 +99,7 @@ export const moveUnkownFile = ({
     }
     return true;
   } catch (error) {
-    console.log('moveUnkownFile', error);
+    console.log('moveUnkownFile failed', error);
     return false;
   }
 };

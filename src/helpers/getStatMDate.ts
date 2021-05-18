@@ -1,8 +1,8 @@
 import * as fs from 'fs-extra';
 
-export const getStatMDate = (filepath: string): Date | undefined => {
+export const getStatMDate = async (filepath: string): Promise<Date | undefined> => {
   try {
-    const stat = fs.statSync(filepath);
+    const stat = await fs.stat(filepath);
     return stat.mtime;
   } catch (error) {
     return undefined;

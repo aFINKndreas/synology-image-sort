@@ -1,6 +1,6 @@
 {
   "name": "synology-image-sort",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "author": "Andreas Fink",
   "bin": {
     "synology-image-sort": "./bin/run"

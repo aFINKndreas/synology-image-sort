@@ -46,20 +46,27 @@ export default class Watch extends Command {
       this.log(`process file '${filepath}'`);
       const isImage = isImageFile(filepath);
       const isVideo = isVideoFile(filepath);
-      if (isImage || isVideo) {
+      if (isImage) {
         const exifData = await getExifData(filepath);
-        const exifDate = exifData ? new Date(exifData.exif.DateTimeOriginal) : undefined;
+        const exifDate = exifData?.exif?.DateTimeOriginal ? new Date(exifData.exif.DateTimeOriginal) : undefined;
         if (!exifDate || exifDate.getFullYear() === 1970 || isNaN(exifDate.getFullYear())) {
-          const statMDate = getStatMDate(filepath);
-          if (!statMDate) return;
-          moveMediaFile({filepath, date: statMDate, source, destination, existing, format, name, tags});
+          const statMDate = await getStatMDate(filepath);
+          if (statMDate) {
+            await moveMediaFile({filepath, date: statMDate, source, destination, existing, format, name, tags});
+          }
         } else {
-          moveMediaFile({filepath, date: exifDate, source, destination, existing, format, name, tags});
+          await moveMediaFile({filepath, date: exifDate, source, destination, existing, format, name, tags});
+        }
+      } else if (isVideo) {
+        const statMDate = await getStatMDate(filepath);
+        if (statMDate) {
+          await moveMediaFile({filepath, date: statMDate, source, destination, existing, format, name, tags});
         }
       } else {
-        const statMDate = getStatMDate(filepath);
-        if (!statMDate) return;
-        moveUnkownFile({filepath, date: statMDate, source, unknown, existing, format, name});
+        const statMDate = await getStatMDate(filepath);
+        if (statMDate) {
+          await moveUnkownFile({filepath, date: statMDate, source, unknown, existing, format, name});
+        }
       }
     });
   }
