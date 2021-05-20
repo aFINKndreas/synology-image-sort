@@ -1,6 +1,6 @@
 {
   "name": "synology-image-sort",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Andreas Fink",
   "bin": {
     "synology-image-sort": "./bin/run"
@@ -31,7 +31,10 @@
   ],
   "homepage": "https://github.com/afinkndreas/synology-image-sort",
   "keywords": [
-    "oclif"
+    "synology",
+    "synology-nas",
+    "image-sort",
+    "synology-image-sort"
   ],
   "license": "MIT",
   "main": "lib/index.js",

@@ -5,6 +5,8 @@
 [![Downloads/week](https://img.shields.io/npm/dw/synology-image-sort.svg)](https://npmjs.org/package/synology-image-sort)
 [![License](https://img.shields.io/npm/l/synology-image-sort.svg)](https://github.com/afinkndreas/synology-image-sort/blob/master/package.json)
 
+simple cli-tool to sort images and video files on a synology nas.
+
 <!-- toc -->
 * [synology-image-sort](#synology-image-sort)
 * [Usage](#usage)
@@ -19,7 +21,7 @@ $ npm install -g synology-image-sort
 $ synology-image-sort COMMAND
 running command...
 $ synology-image-sort (-v|--version|version)
-synology-image-sort/1.0.0 darwin-x64 node-v12.13.1
+synology-image-sort/1.0.1 darwin-x64 node-v12.13.1
 $ synology-image-sort --help [COMMAND]
 USAGE
   $ synology-image-sort COMMAND
@@ -76,7 +78,7 @@ EXAMPLES
   $ synology-image-sort move -s ./source -d ./destination -u ./unknown -e ./existing -n DD.MM.YYYY-HH.mm.ss.SSS
 ```
 
-_See code: [src/commands/move.ts](https://github.com/afinkndreas/synology-image-sort/blob/v1.0.0/src/commands/move.ts)_
+_See code: [src/commands/move.ts](https://github.com/afinkndreas/synology-image-sort/blob/v1.0.1/src/commands/move.ts)_
 
 ## `synology-image-sort watch`
 
@@ -103,5 +105,5 @@ EXAMPLES
   $ synology-image-sort watch -s ./source -d ./destination -u ./unknown -e ./existing -n DD.MM.YYYY-HH.mm.ss.SSS
 ```
 
-_See code: [src/commands/watch.ts](https://github.com/afinkndreas/synology-image-sort/blob/v1.0.0/src/commands/watch.ts)_
+_See code: [src/commands/watch.ts](https://github.com/afinkndreas/synology-image-sort/blob/v1.0.1/src/commands/watch.ts)_
 <!-- commandsstop -->
