@@ -10,7 +10,7 @@ import {moveUnkownFile} from '../helpers/moveUnkownFile';
 import {getDirectoryFiles} from '../helpers/getDirectoryFiles';
 
 export default class Move extends Command {
-  static description = 'move files (images, videos) on synology nas';
+  static description = 'sort files from the source directory';
   static examples = [
     `$ synology-image-sort move -s ./source -d ./destination -u ./unknown -e ./existing`,
     `$ synology-image-sort move -s ./source -d ./destination -u ./unknown -e ./existing -t`,
@@ -23,9 +23,12 @@ export default class Move extends Command {
     destination: flags.string({char: 'd', description: 'destination directory', required: true}),
     unknown: flags.string({char: 'u', description: 'unknown directory', required: true}),
     existing: flags.string({char: 'e', description: 'existing directory', required: true}),
-    format: flags.string({char: 'f', description: 'date format', default: 'YYYY/MM.YYYY/DD.MM.YYYY'}),
+    format: flags.string({char: 'f', description: 'folder structure', default: 'YYYY/MM.YYYY/DD.MM.YYYY'}),
     name: flags.string({char: 'n', description: 'file name', default: 'DD.MM.YYYY-HH.mm.ss.SSS'}),
-    tags: flags.boolean({char: 't', description: 'set folder tags'}),
+    tags: flags.boolean({
+      char: 't',
+      description: 'enable tagging for media files. adds parent folder names as exif-tags',
+    }),
   };
 
   async run() {

@@ -10,7 +10,8 @@ import {moveMediaFile} from '../helpers/moveMediaFile';
 import {moveUnkownFile} from '../helpers/moveUnkownFile';
 
 export default class Watch extends Command {
-  static description = 'sort files (images, videos) on synology nas';
+  static description =
+    'watch for files in the source directory to be sorted. keep in mind that it is not recommended for folders with a huge amount of files.';
   static examples = [
     `$ synology-image-sort watch -s ./source -d ./destination -u ./unknown -e ./existing`,
     `$ synology-image-sort watch -s ./source -d ./destination -u ./unknown -e ./existing -t`,
@@ -23,9 +24,12 @@ export default class Watch extends Command {
     destination: flags.string({char: 'd', description: 'destination directory', required: true}),
     unknown: flags.string({char: 'u', description: 'unknown directory', required: true}),
     existing: flags.string({char: 'e', description: 'existing directory', required: true}),
-    format: flags.string({char: 'f', description: 'date format', default: 'YYYY/MM.YYYY/DD.MM.YYYY'}),
+    format: flags.string({char: 'f', description: 'folder structure', default: 'YYYY/MM.YYYY/DD.MM.YYYY'}),
     name: flags.string({char: 'n', description: 'file name', default: 'DD.MM.YYYY-HH.mm.ss.SSS'}),
-    tags: flags.boolean({char: 't', description: 'set folder tags'}),
+    tags: flags.boolean({
+      char: 't',
+      description: 'enable tagging for media files. adds parent folder names as exif-tags',
+    }),
   };
 
   async run() {
